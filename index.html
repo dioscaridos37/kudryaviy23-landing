@@ -18,7 +18,7 @@
             color: white;
             display: flex;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
         }
 
@@ -33,146 +33,16 @@
             z-index: 1;
         }
 
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 250px;
-            height: 100vh;
-            background: linear-gradient(180deg, rgba(26, 13, 46, 0.95) 0%, rgba(15, 12, 41, 0.95) 100%);
-            z-index: 10;
-            padding: 20px 0;
-            transform: translateX(0);
-            transition: transform 0.3s ease;
-            box-shadow: 5px 0 20px rgba(145, 70, 255, 0.2);
-            overflow-y: auto;
-        }
-
-        .sidebar-toggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 11;
-            background: linear-gradient(45deg, #9146FF 0%, #FF00FF 100%);
-            border: none;
-            color: white;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(145, 70, 255, 0.3);
-        }
-
-        .sidebar-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 20px rgba(145, 70, 255, 0.5);
-        }
-
-        .sidebar h3 {
-            color: #9146FF;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-        }
-
-        .nav-button {
-            display: block;
-            width: 90%;
-            margin: 10px auto;
-            padding: 12px 20px;
-            background: transparent;
-            border: 1px solid #9146FF;
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            text-align: center;
-            font-family: 'Audiowide', cursive;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0.8;
-        }
-
-        .nav-button:hover, .nav-button.active {
-            background: linear-gradient(45deg, #9146FF 0%, #FF00FF 100%);
-            opacity: 1;
-            box-shadow: 0 5px 15px rgba(145, 70, 255, 0.4);
-            transform: translateX(5px);
-        }
-
-        /* Modal Overlay */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 20;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, #1a0d2e 0%, #16213e 100%);
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 40px rgba(145, 70, 255, 0.3);
-            border: 1px solid rgba(145, 70, 255, 0.2);
-        }
-
-        .modal h2 {
-            color: #9146FF;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 1.8rem;
-            letter-spacing: 2px;
-        }
-
-        .modal p, .modal li {
-            margin-bottom: 10px;
-            line-height: 1.5;
-            opacity: 0.9;
-            font-size: 1rem;
-        }
-
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            color: #9146FF;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close:hover {
-            color: #FF00FF;
-        }
-
         /* Main Content */
         .main-content {
-            margin-left: 250px;
-            width: calc(100% - 250px);
+            width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            padding-bottom: 300px; /* Prevent overlap with player section */
             z-index: 2;
             position: relative;
         }
@@ -267,13 +137,13 @@
         .player-section {
             position: fixed;
             bottom: 0;
-            left: 250px;
-            width: calc(100% - 250px);
-            height: 250px;
+            left: 0;
+            width: 100%;
+            height: 300px;
             background: linear-gradient(to top, rgba(26, 13, 46, 0.95) 0%, transparent 100%);
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             z-index: 3;
             padding: 20px;
@@ -281,29 +151,84 @@
         }
 
         .watch-link {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             font-size: 1.2rem;
             color: #9146FF;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-family: 'Audiowide', cursive;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .watch-link:hover {
             color: #FF00FF;
             text-shadow: 0 0 10px #FF00FF;
+            transform: scale(1.05);
         }
 
         .twitch-player {
             width: 90%;
             max-width: 600px;
-            height: 200px;
+            height: 180px;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 -10px 30px rgba(145, 70, 255, 0.3);
             border: none;
+            margin-bottom: 10px;
+        }
+
+        /* Navigation Buttons under Player */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 600px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            flex: 1;
+            min-width: 120px;
+            padding: 8px 15px;
+            background: linear-gradient(45deg, rgba(145, 70, 255, 0.2) 0%, rgba(255, 0, 255, 0.2) 100%);
+            border: 1px solid rgba(145, 70, 255, 0.5);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            text-align: center;
+            font-family: 'Audiowide', cursive;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0.8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-button:hover::before {
+            left: 100%;
+        }
+
+        .nav-button:hover, .nav-button.active {
+            background: linear-gradient(45deg, #9146FF 0%, #FF00FF 100%);
+            opacity: 1;
+            box-shadow: 0 5px 20px rgba(145, 70, 255, 0.4);
+            transform: translateY(-2px) scale(1.02);
         }
 
         /* Glowing center image */
@@ -331,20 +256,69 @@
             }
         }
 
+        /* Modal Overlay */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 20;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #1a0d2e 0%, #16213e 100%);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(145, 70, 255, 0.3);
+            border: 1px solid rgba(145, 70, 255, 0.2);
+        }
+
+        .modal h2 {
+            color: #9146FF;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+
+        .modal p, .modal li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #9146FF;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #FF00FF;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-
             .main-content {
-                margin-left: 0;
-                width: 100%;
-            }
-
-            .player-section {
-                left: 0;
-                width: 100%;
+                padding-bottom: 280px;
             }
 
             .title {
@@ -366,13 +340,23 @@
             }
 
             .player-section {
-                height: 200px;
-                padding: 10px;
+                height: 280px;
+                padding: 15px;
             }
 
             .twitch-player {
-                height: 150px;
+                height: 140px;
                 width: 95%;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .nav-button {
+                min-width: auto;
+                width: 100%;
             }
 
             .glowing-icon {
@@ -393,19 +377,15 @@
             .watch-link {
                 font-size: 1rem;
             }
+
+            .nav-button {
+                font-size: 0.8rem;
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
-
-    <div class="sidebar" id="sidebar">
-        <h3>Разделы</h3>
-        <button class="nav-button" onclick="showModal('about')">ОБО МНЕ</button>
-        <button class="nav-button" onclick="showModal('pc')">МОЙ ПК</button>
-        <button class="nav-button" onclick="showModal('donaters')">МОИ ДОНАТЕРЫ</button>
-    </div>
-
     <div class="main-content">
         <div class="container">
             <div class="header">
@@ -435,6 +415,12 @@
             class="twitch-player" 
             allowfullscreen>
         </iframe>
+
+        <div class="nav-buttons">
+            <button class="nav-button" onclick="showModal('about')">ОБО МНЕ</button>
+            <button class="nav-button" onclick="showModal('pc')">МОЙ ПК</button>
+            <button class="nav-button" onclick="showModal('donaters')">МОИ ДОНАТЕРЫ</button>
+        </div>
     </div>
 
     <!-- Modals -->
@@ -482,11 +468,6 @@
     </div>
 
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.style.transform = sidebar.style.transform === 'translateX(-100%)' ? 'translateX(0)' : 'translateX(-100%)';
-        }
-
         function showModal(id) {
             document.getElementById(id).style.display = 'block';
             const buttons = document.querySelectorAll('.nav-button');
