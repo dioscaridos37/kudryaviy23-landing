@@ -88,17 +88,6 @@
             transition: all 0.5s ease;
         }
 
-        .center-text.online {
-            color: #FF00FF;
-            text-shadow: 0 0 40px #FF00FF;
-            animation: onlineGlow 1s ease-in-out infinite alternate;
-        }
-
-        @keyframes onlineGlow {
-            from { text-shadow: 0 0 30px rgba(255, 0, 255, 0.5); }
-            to { text-shadow: 0 0 50px rgba(255, 0, 255, 0.8); }
-        }
-
         .button {
             display: inline-block;
             padding: 15px 40px;
@@ -407,7 +396,7 @@
 
             <div class="glowing-icon"></div>
 
-            <h2 class="center-text" id="status-text">ПРОВЕРКА...</h2>
+            <h2 class="center-text" id="motivation-text">Залетай, будет жарко!</h2>
 
             <a href="https://www.twitch.tv/kudryaviy23" target="_blank" class="button">Watch on Twitch</a>
 
@@ -423,7 +412,6 @@
     <div class="player-section">
         <a href="https://www.twitch.tv/kudryaviy23" target="_blank" class="watch-link">СМОТРЕТЬ ТУТ</a>
         <iframe 
-            id="twitch-player"
             src="https://player.twitch.tv/?channel=kudryaviy23&parent=dioscaridos37.github.io&muted=true" 
             class="twitch-player" 
             allowfullscreen>
@@ -481,47 +469,29 @@
     </div>
 
     <script>
-        // Функция для проверки статуса стрима
-        async function checkStreamStatus() {
-            const clientId = 'YOUR_CLIENT_ID'; // Замените на ваш реальный Twitch Client-ID (получите на https://dev.twitch.tv/console/apps)
-            const statusElement = document.getElementById('status-text');
-            const playerIframe = document.getElementById('twitch-player');
+        // Массив мотивационных фраз
+        const motivationPhrases = [
+            "Залетай, будет жарко!",
+            "Не пропусти эпик фейлы и винсы!",
+            "Соберись, стрим ждёт героя!",
+            "Кликни и стань легендой чата!",
+            "Время рвать в геймах – жми play!",
+            "Готов к хаосу? Стрим зовёт!",
+            "Фраза дня: 'Я смотрю kudryaviy23, потому что могу!'",
+            "Твой любимый стример – твой билет в веселье!"
+        ];
 
-            try {
-                const response = await fetch('https://api.twitch.tv/helix/streams?user_login=kudryaviy23', {
-                    headers: {
-                        'Client-ID': clientId
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error('API request failed');
-                }
-
-                const data = await response.json();
-                const isLive = data.data && data.data.length > 0;
-
-                if (isLive) {
-                    statusElement.textContent = 'ОНЛАЙН';
-                    statusElement.classList.add('online');
-                    // Плеер уже активен для live, ничего не меняем
-                } else {
-                    statusElement.textContent = 'ОФФЛАЙН';
-                    statusElement.classList.remove('online');
-                    // Плеер покажет offline/VOD автоматически
-                }
-            } catch (error) {
-                console.error('Error checking stream status:', error);
-                statusElement.textContent = 'ОШИБКА ПРОВЕРКИ';
-                // Fallback: плеер работает независимо
-            }
+        // Функция для установки случайной фразы
+        function setRandomMotivation() {
+            const randomIndex = Math.floor(Math.random() * motivationPhrases.length);
+            document.getElementById('motivation-text').textContent = motivationPhrases[randomIndex];
         }
 
-        // Запуск проверки при загрузке страницы
-        window.addEventListener('load', checkStreamStatus);
+        // Установка при загрузке страницы
+        window.addEventListener('load', setRandomMotivation);
 
-        // Периодическая проверка каждые 30 секунд (опционально)
-        setInterval(checkStreamStatus, 30000);
+        // Опционально: менять фразу каждые 30 секунд
+        setInterval(setRandomMotivation, 30000);
 
         function showModal(id) {
             document.getElementById(id).style.display = 'block';
