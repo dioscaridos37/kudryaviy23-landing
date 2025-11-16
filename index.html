@@ -19,7 +19,6 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            cursor: none; /* Optional: hide default cursor for fun */
         }
         body::before {
             content: '';
@@ -248,6 +247,7 @@
         /* Flying Donaters */
         .donater {
             position: absolute;
+            left: -150px;
             background: linear-gradient(45deg, rgba(145, 70, 255, 0.1), rgba(255, 0, 255, 0.1));
             border: 1px solid rgba(145, 70, 255, 0.3);
             border-radius: 15px;
@@ -256,10 +256,10 @@
             color: #FF00FF;
             text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
             z-index: 0;
-            pointer-events: all;
+            pointer-events: auto;
             transition: transform 0.3s ease, opacity 0.3s ease;
             box-shadow: 0 0 10px rgba(145, 70, 255, 0.2);
-            animation: float 15s linear infinite;
+            animation: float linear infinite;
             white-space: nowrap;
         }
         .donater .nickname {
@@ -272,8 +272,9 @@
         }
         @keyframes float {
             0% {
-                transform: translateX(-100px) translateY(0) rotate(0deg);
+                left: -150px;
                 opacity: 0;
+                transform: translateY(0) rotate(0deg);
             }
             10% {
                 opacity: 1;
@@ -282,19 +283,20 @@
                 opacity: 1;
             }
             100% {
-                transform: translateX(calc(100vw + 100px)) translateY(0) rotate(360deg);
+                left: calc(100vw + 150px);
                 opacity: 0;
+                transform: translateY(0) rotate(360deg);
             }
         }
-        .donater:nth-child(1) { top: 20%; animation-duration: 20s; animation-delay: 0s; }
-        .donater:nth-child(2) { top: 30%; animation-duration: 25s; animation-delay: 5s; }
-        .donater:nth-child(3) { top: 50%; animation-duration: 18s; animation-delay: 10s; }
-        .donater:nth-child(4) { top: 70%; animation-duration: 22s; animation-delay: 2s; }
-        .donater:nth-child(5) { top: 40%; animation-duration: 28s; animation-delay: 15s; }
         .donater.repel {
             transform: scale(1.1) !important;
             z-index: 5;
         }
+        .donater:nth-child(1) { top: 20%; animation-duration: 20s; animation-delay: 0s; }
+        .donater:nth-child(2) { top: 30%; animation-duration: 25s; animation-delay: 5s; transform: translateY(20px); }
+        .donater:nth-child(3) { top: 50%; animation-duration: 18s; animation-delay: 10s; transform: translateY(-10px); }
+        .donater:nth-child(4) { top: 70%; animation-duration: 22s; animation-delay: 2s; transform: translateY(15px); }
+        .donater:nth-child(5) { top: 40%; animation-duration: 28s; animation-delay: 15s; transform: translateY(-20px); }
         /* Responsive */
         @media (max-width: 768px) {
             .title {
@@ -370,11 +372,11 @@
         </div>
     </div>
     <!-- Flying Donaters -->
-    <div class="donater" style="animation-delay: 0s;"><span class="nickname">ПЕНЁК</span> <span class="amount">- 1500 RUB</span></div>
-    <div class="donater" style="animation-delay: 3s;"><span class="nickname">ЮРКА</span> <span class="amount">- 1030 RUB</span></div>
-    <div class="donater" style="animation-delay: 6s;"><span class="nickname">ТВИЧСЕЙН</span> <span class="amount">- 478 RUB</span></div>
-    <div class="donater" style="animation-delay: 9s;"><span class="nickname">АНОНИМ</span> <span class="amount">- 215.55 RUB</span></div>
-    <div class="donater" style="animation-delay: 12s;"><span class="nickname">ПАКО</span> <span class="amount">- 111 RUB</span></div>
+    <div class="donater"><span class="nickname">ПЕНЁК</span> <span class="amount">- 1500 RUB</span></div>
+    <div class="donater"><span class="nickname">ЮРКА</span> <span class="amount">- 1030 RUB</span></div>
+    <div class="donater"><span class="nickname">ТВИЧСЕЙН</span> <span class="amount">- 478 RUB</span></div>
+    <div class="donater"><span class="nickname">АНОНИМ</span> <span class="amount">- 215.55 RUB</span></div>
+    <div class="donater"><span class="nickname">ПАКО</span> <span class="amount">- 111 RUB</span></div>
     <!-- Modals -->
     <div id="about" class="modal">
         <div class="modal-content">
@@ -453,14 +455,14 @@
                 const dy = centerY - mouseY;
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (distance < 100) { // Repel if within 100px
+                if (distance < 80) { // Reduced repel distance to 80px for better feel
                     const angle = Math.atan2(dy, dx);
-                    const force = (100 - distance) / 10;
-                    donater.style.transform = `translate(${force * Math.cos(angle)}px, ${force * Math.sin(angle)}px) scale(1.1)`;
+                    const force = (80 - distance) / 8; // Adjusted force for smoother push
+                    donater.style.setProperty('--repel-x', `${force * Math.cos(angle)}px`);
+                    donater.style.setProperty('--repel-y', `${force * Math.sin(angle)}px`);
                     donater.classList.add('repel');
                     setTimeout(() => {
                         donater.classList.remove('repel');
-                        donater.style.transform = ''; // Reset after animation
                     }, 300);
                 }
             });
