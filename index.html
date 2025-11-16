@@ -17,9 +17,6 @@
             background: linear-gradient(135deg, #1a0d2e 0%, #16213e 50%, #0f0c29 100%);
             color: white;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
             overflow: hidden;
             position: relative;
@@ -36,10 +33,152 @@
             z-index: 1;
         }
 
-        .container {
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(180deg, rgba(26, 13, 46, 0.95) 0%, rgba(15, 12, 41, 0.95) 100%);
+            z-index: 10;
+            padding: 20px 0;
+            transform: translateX(0);
+            transition: transform 0.3s ease;
+            box-shadow: 5px 0 20px rgba(145, 70, 255, 0.2);
+            overflow-y: auto;
+        }
+
+        .sidebar-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 11;
+            background: linear-gradient(45deg, #9146FF 0%, #FF00FF 100%);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(145, 70, 255, 0.3);
+        }
+
+        .sidebar-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(145, 70, 255, 0.5);
+        }
+
+        .sidebar h3 {
+            color: #9146FF;
             text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .nav-button {
+            display: block;
+            width: 90%;
+            margin: 10px auto;
+            padding: 12px 20px;
+            background: transparent;
+            border: 1px solid #9146FF;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            text-align: center;
+            font-family: 'Audiowide', cursive;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .nav-button:hover, .nav-button.active {
+            background: linear-gradient(45deg, #9146FF 0%, #FF00FF 100%);
+            opacity: 1;
+            box-shadow: 0 5px 15px rgba(145, 70, 255, 0.4);
+            transform: translateX(5px);
+        }
+
+        /* Modal Overlay */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 20;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #1a0d2e 0%, #16213e 100%);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(145, 70, 255, 0.3);
+            border: 1px solid rgba(145, 70, 255, 0.2);
+        }
+
+        .modal h2 {
+            color: #9146FF;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+
+        .modal p, .modal li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #9146FF;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #FF00FF;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
             z-index: 2;
             position: relative;
+        }
+
+        .container {
+            text-align: center;
             width: 100%;
             max-width: 800px;
             padding: 20px;
@@ -50,7 +189,7 @@
         }
 
         .title {
-            font-size: 5rem; /* ~80px on desktop */
+            font-size: 5rem;
             font-weight: normal;
             background: linear-gradient(45deg, white 0%, #9146FF 100%);
             -webkit-background-clip: text;
@@ -126,10 +265,10 @@
 
         /* Player Section */
         .player-section {
-            position: absolute;
+            position: fixed;
             bottom: 0;
-            left: 0;
-            width: 100%;
+            left: 250px;
+            width: calc(100% - 250px);
             height: 250px;
             background: linear-gradient(to top, rgba(26, 13, 46, 0.95) 0%, transparent 100%);
             display: flex;
@@ -167,8 +306,47 @@
             border: none;
         }
 
+        /* Glowing center image */
+        .glowing-icon {
+            width: 150px;
+            height: 150px;
+            margin: 40px auto;
+            background-image: url('https://static-cdn.jtvnw.net/jtv_user_pictures/5b360651-4603-4132-8327-64e3f047e4c0-profile_image-70x70.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 50%;
+            filter: drop-shadow(0 0 20px #9146FF);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { 
+                filter: drop-shadow(0 0 20px #9146FF); 
+                transform: scale(1);
+            }
+            to { 
+                filter: drop-shadow(0 0 50px #FF00FF); 
+                transform: scale(1.05);
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .player-section {
+                left: 0;
+                width: 100%;
+            }
+
             .title {
                 font-size: 3rem;
             }
@@ -196,6 +374,11 @@
                 height: 150px;
                 width: 95%;
             }
+
+            .glowing-icon {
+                width: 100px;
+                height: 100px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -211,58 +394,37 @@
                 font-size: 1rem;
             }
         }
-
-        /* Glowing center image */
-        .glowing-icon {
-            width: 150px;
-            height: 150px;
-            margin: 40px auto;
-            background-image: url('https://static-cdn.jtvnw.net/jtv_user_pictures/5b360651-4603-4132-8327-64e3f047e4c0-profile_image-70x70.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: 50%;
-            filter: drop-shadow(0 0 20px #9146FF);
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { 
-                filter: drop-shadow(0 0 20px #9146FF); 
-                transform: scale(1);
-            }
-            to { 
-                filter: drop-shadow(0 0 50px #FF00FF); 
-                transform: scale(1.05);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .glowing-icon {
-                width: 100px;
-                height: 100px;
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1 class="title">Kudryavy23</h1>
-            <p class="subtitle">Легенда Twitch</p>
-        </div>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
 
-        <div class="glowing-icon"></div>
+    <div class="sidebar" id="sidebar">
+        <h3>Разделы</h3>
+        <button class="nav-button" onclick="showModal('about')">ОБО МНЕ</button>
+        <button class="nav-button" onclick="showModal('pc')">МОЙ ПК</button>
+        <button class="nav-button" onclick="showModal('donaters')">МОИ ДОНАТЕРЫ</button>
+    </div>
 
-        <h2 class="center-text">STREAM SOON</h2>
+    <div class="main-content">
+        <div class="container">
+            <div class="header">
+                <h1 class="title">Kudryavy23</h1>
+                <p class="subtitle">Легенда Twitch</p>
+            </div>
 
-        <a href="https://www.twitch.tv/kudryaviy23" target="_blank" class="button">Watch on Twitch</a>
+            <div class="glowing-icon"></div>
 
-        <div class="footer">
-            <svg class="twitch-icon" viewBox="0 0 24 24">
-                <path fill="#9146FF" d="M21.6 0H2.4C1.07 0 0 1.07 0 2.4v19.2C0 22.93 1.07 24 2.4 24h19.2c1.33 0 2.4-1.07 2.4-2.4V2.4C24 1.07 22.93 0 21.6 0zM12 22c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm-1-11H9v2h2v4h2v-4h2v-2h-2V9h-2v2z"/>
-            </svg>
-            Подпишись и не пропусти
+            <h2 class="center-text">STREAM SOON</h2>
+
+            <a href="https://www.twitch.tv/kudryaviy23" target="_blank" class="button">Watch on Twitch</a>
+
+            <div class="footer">
+                <svg class="twitch-icon" viewBox="0 0 24 24">
+                    <path fill="#9146FF" d="M21.6 0H2.4C1.07 0 0 1.07 0 2.4v19.2C0 22.93 1.07 24 2.4 24h19.2c1.33 0 2.4-1.07 2.4-2.4V2.4C24 1.07 22.93 0 21.6 0zM12 22c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm-1-11H9v2h2v4h2v-4h2v-2h-2V9h-2v2z"/>
+                </svg>
+                Подпишись и не пропусти
+            </div>
         </div>
     </div>
 
@@ -274,5 +436,79 @@
             allowfullscreen>
         </iframe>
     </div>
+
+    <!-- Modals -->
+    <div id="about" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('about')">&times;</span>
+            <h2>ОБО МНЕ 👁️-👁️</h2>
+            <p>Живу в частном доме , топлю печку зимой .</p>
+            <p>Рост - шкаф</p>
+            <p>Вес - тумбочка</p>
+            <p>Харизма - зеркало</p>
+            <p>Зачем я пришёл в стримеры ? А зачем ты смотришь тогда меня ?</p>
+            <p>Где родился . там никому не нужен - привет получается</p>
+        </div>
+    </div>
+
+    <div id="pc" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('pc')">&times;</span>
+            <h2>МОЙ ПК</h2>
+            <p>ВИДЯ - 3050 8хб</p>
+            <p>ОПЕРАТИВКИ 16хб</p>
+            <p>ПРОЦ - i512400f</p>
+            <p>ЭССЭС - 512хб</p>
+            <p>ЖД - 2тэбэ</p>
+            <p>Периферия дешман</p>
+            <p>МЫШЬ - НА КУХНЕ ПОЙМАЛ</p>
+            <p>КЛАВА - подарили рейзер ( светится круто )</p>
+            <p>МИКРО - ЗЕТ КОРЭДЖ С ДНС</p>
+            <p>КАМ - ОРАКЛ</p>
+            <p>УШИ - КАПЕЛЬКИ С ВБ ЗА 156р</p>
+        </div>
+    </div>
+
+    <div id="donaters" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('donaters')">&times;</span>
+            <h2>МОИ ДОНАТЕРЫ 💲БОГАЧИ💲</h2>
+            <p>ПЕНЁК - 1500 RUB</p>
+            <p>ЮРКА - 1030 RUB</p>
+            <p>ТВИЧСЕЙН - 478 RUB</p>
+            <p>АНОНИМ - 215.55 RUB</p>
+            <p>ПАКО - 111 RUB</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.transform = sidebar.style.transform === 'translateX(-100%)' ? 'translateX(0)' : 'translateX(-100%)';
+        }
+
+        function showModal(id) {
+            document.getElementById(id).style.display = 'block';
+            const buttons = document.querySelectorAll('.nav-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+            document.querySelector('.nav-button.active').classList.remove('active');
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.querySelector('.nav-button.active')?.classList.remove('active');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
