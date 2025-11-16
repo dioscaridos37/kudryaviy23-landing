@@ -19,6 +19,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            cursor: none; /* Optional: hide default cursor for fun */
         }
         body::before {
             content: '';
@@ -39,7 +40,6 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            padding-bottom: 300px; /* Prevent overlap with player section */
             z-index: 2;
             position: relative;
         }
@@ -120,48 +120,7 @@
             height: 24px;
             fill: #9146FF;
         }
-        /* Player Section */
-        .player-section {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(to top, rgba(26, 13, 46, 0.95) 0%, transparent 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 3;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .watch-link {
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-            color: #9146FF;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-family: 'Audiowide', cursive;
-            transition: all 0.3s ease;
-        }
-        .watch-link:hover {
-            color: #FF00FF;
-            text-shadow: 0 0 10px #FF00FF;
-            transform: scale(1.05);
-        }
-        .twitch-player {
-            width: 90%;
-            max-width: 600px;
-            height: 180px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 -10px 30px rgba(145, 70, 255, 0.3);
-            border: none;
-            margin-bottom: 10px;
-        }
-        /* Navigation Buttons under Player */
+        /* Navigation Buttons */
         .nav-buttons {
             display: flex;
             justify-content: space-around;
@@ -169,6 +128,7 @@
             max-width: 600px;
             gap: 10px;
             flex-wrap: wrap;
+            margin-top: 40px;
         }
         .nav-button {
             flex: 1;
@@ -285,11 +245,58 @@
         .close:hover {
             color: #FF00FF;
         }
+        /* Flying Donaters */
+        .donater {
+            position: absolute;
+            background: linear-gradient(45deg, rgba(145, 70, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border: 1px solid rgba(145, 70, 255, 0.3);
+            border-radius: 15px;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            color: #FF00FF;
+            text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+            z-index: 0;
+            pointer-events: all;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            box-shadow: 0 0 10px rgba(145, 70, 255, 0.2);
+            animation: float 15s linear infinite;
+            white-space: nowrap;
+        }
+        .donater .nickname {
+            font-weight: bold;
+            color: #9146FF;
+        }
+        .donater .amount {
+            margin-left: 5px;
+            opacity: 0.8;
+        }
+        @keyframes float {
+            0% {
+                transform: translateX(-100px) translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px)) translateY(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        .donater:nth-child(1) { top: 20%; animation-duration: 20s; animation-delay: 0s; }
+        .donater:nth-child(2) { top: 30%; animation-duration: 25s; animation-delay: 5s; }
+        .donater:nth-child(3) { top: 50%; animation-duration: 18s; animation-delay: 10s; }
+        .donater:nth-child(4) { top: 70%; animation-duration: 22s; animation-delay: 2s; }
+        .donater:nth-child(5) { top: 40%; animation-duration: 28s; animation-delay: 15s; }
+        .donater.repel {
+            transform: scale(1.1) !important;
+            z-index: 5;
+        }
         /* Responsive */
         @media (max-width: 768px) {
-            .main-content {
-                padding-bottom: 280px;
-            }
             .title {
                 font-size: 3rem;
             }
@@ -304,14 +311,6 @@
                 padding: 12px 30px;
                 font-size: 1rem;
             }
-            .player-section {
-                height: 280px;
-                padding: 15px;
-            }
-            .twitch-player {
-                height: 140px;
-                width: 95%;
-            }
             .nav-buttons {
                 flex-direction: column;
                 gap: 8px;
@@ -324,6 +323,10 @@
                 width: 100px;
                 height: 100px;
             }
+            .donater {
+                font-size: 0.7rem;
+                padding: 6px 10px;
+            }
         }
         @media (max-width: 480px) {
             .title {
@@ -332,12 +335,13 @@
             .center-text {
                 font-size: 2rem;
             }
-            .watch-link {
-                font-size: 1rem;
-            }
             .nav-button {
                 font-size: 0.8rem;
                 padding: 10px;
+            }
+            .donater {
+                font-size: 0.6rem;
+                padding: 5px 8px;
             }
         }
     </style>
@@ -352,6 +356,11 @@
             <div class="glowing-icon"></div>
             <h2 class="center-text" id="motivation-text">Залетай, будет жарко!</h2>
             <a href="https://www.twitch.tv/kudryaviy23" target="_blank" class="button">Watch on Twitch</a>
+            <div class="nav-buttons">
+                <button class="nav-button" onclick="showModal('about')">ОБО МНЕ</button>
+                <button class="nav-button" onclick="showModal('pc')">МОЙ ПК</button>
+                <button class="nav-button" onclick="showModal('donaters')">МОИ ДОНАТЕРЫ</button>
+            </div>
             <div class="footer">
                 <svg class="twitch-icon" viewBox="0 0 24 24">
                     <path fill="#9146FF" d="M21.6 0H2.4C1.07 0 0 1.07 0 2.4v19.2C0 22.93 1.07 24 2.4 24h19.2c1.33 0 2.4-1.07 2.4-2.4V2.4C24 1.07 22.93 0 21.6 0zM12 22c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm-1-11H9v2h2v4h2v-4h2v-2h-2V9h-2v2z"/>
@@ -360,19 +369,12 @@
             </div>
         </div>
     </div>
-    <div class="player-section">
-        <a href="https://www.twitch.tv/kudryaviy23" target="_blank" class="watch-link">СМОТРЕТЬ ТУТ</a>
-        <iframe
-            src="https://player.twitch.tv/?channel=kudryaviy23&parent=dioscaridos37.github.io&muted=true"
-            class="twitch-player"
-            allowfullscreen>
-        </iframe>
-        <div class="nav-buttons">
-            <button class="nav-button" onclick="showModal('about')">ОБО МНЕ</button>
-            <button class="nav-button" onclick="showModal('pc')">МОЙ ПК</button>
-            <button class="nav-button" onclick="showModal('donaters')">МОИ ДОНАТЕРЫ</button>
-        </div>
-    </div>
+    <!-- Flying Donaters -->
+    <div class="donater" style="animation-delay: 0s;"><span class="nickname">ПЕНЁК</span> <span class="amount">- 1500 RUB</span></div>
+    <div class="donater" style="animation-delay: 3s;"><span class="nickname">ЮРКА</span> <span class="amount">- 1030 RUB</span></div>
+    <div class="donater" style="animation-delay: 6s;"><span class="nickname">ТВИЧСЕЙН</span> <span class="amount">- 478 RUB</span></div>
+    <div class="donater" style="animation-delay: 9s;"><span class="nickname">АНОНИМ</span> <span class="amount">- 215.55 RUB</span></div>
+    <div class="donater" style="animation-delay: 12s;"><span class="nickname">ПАКО</span> <span class="amount">- 111 RUB</span></div>
     <!-- Modals -->
     <div id="about" class="modal">
         <div class="modal-content">
@@ -434,6 +436,36 @@
         window.addEventListener('load', setRandomMotivation);
         // Опционально: менять фразу каждые 30 секунд
         setInterval(setRandomMotivation, 30000);
+
+        // Flying Donaters Interaction
+        const donaters = document.querySelectorAll('.donater');
+        let mouseX = 0, mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            donaters.forEach(donater => {
+                const rect = donater.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const dx = centerX - mouseX;
+                const dy = centerY - mouseY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 100) { // Repel if within 100px
+                    const angle = Math.atan2(dy, dx);
+                    const force = (100 - distance) / 10;
+                    donater.style.transform = `translate(${force * Math.cos(angle)}px, ${force * Math.sin(angle)}px) scale(1.1)`;
+                    donater.classList.add('repel');
+                    setTimeout(() => {
+                        donater.classList.remove('repel');
+                        donater.style.transform = ''; // Reset after animation
+                    }, 300);
+                }
+            });
+        });
+
         function showModal(id) {
             document.getElementById(id).style.display = 'block';
             const buttons = document.querySelectorAll('.nav-button');
