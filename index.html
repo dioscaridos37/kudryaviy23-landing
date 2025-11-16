@@ -247,7 +247,6 @@
         /* Flying Donaters */
         .donater {
             position: absolute;
-            left: -150px;
             background: linear-gradient(45deg, rgba(145, 70, 255, 0.1), rgba(255, 0, 255, 0.1));
             border: 1px solid rgba(145, 70, 255, 0.3);
             border-radius: 15px;
@@ -257,10 +256,10 @@
             text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
             z-index: 0;
             pointer-events: auto;
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            transition: transform 0.3s ease;
             box-shadow: 0 0 10px rgba(145, 70, 255, 0.2);
-            animation: float linear infinite;
             white-space: nowrap;
+            opacity: 0.9;
         }
         .donater .nickname {
             font-weight: bold;
@@ -270,33 +269,10 @@
             margin-left: 5px;
             opacity: 0.8;
         }
-        @keyframes float {
-            0% {
-                left: -150px;
-                opacity: 0;
-                transform: translateY(0) rotate(0deg);
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                left: calc(100vw + 150px);
-                opacity: 0;
-                transform: translateY(0) rotate(360deg);
-            }
-        }
         .donater.repel {
             transform: scale(1.1) !important;
             z-index: 5;
         }
-        .donater:nth-child(1) { top: 20%; animation-duration: 20s; animation-delay: 0s; }
-        .donater:nth-child(2) { top: 30%; animation-duration: 25s; animation-delay: 5s; transform: translateY(20px); }
-        .donater:nth-child(3) { top: 50%; animation-duration: 18s; animation-delay: 10s; transform: translateY(-10px); }
-        .donater:nth-child(4) { top: 70%; animation-duration: 22s; animation-delay: 2s; transform: translateY(15px); }
-        .donater:nth-child(5) { top: 40%; animation-duration: 28s; animation-delay: 15s; transform: translateY(-20px); }
         /* Responsive */
         @media (max-width: 768px) {
             .title {
@@ -372,12 +348,11 @@
         </div>
     </div>
     <!-- Flying Donaters -->
-    <div class="donater"><span class="nickname">ПЕНЁК</span> <span class="amount">- 1500 RUB</span></div>
-    <div class="donater"><span class="nickname">ЮРКА</span> <span class="amount">- 1030 RUB</span></div>
-    <div class="donater"><span class="nickname">ТВИЧСЕЙН</span> <span class="amount">- 478 RUB</span></div>
-    <div class="donater"><span class="nickname">АНОНИМ</span> <span class="amount">- 215.55 RUB</span></div>
-    <div class="donater"><span class="nickname">ПАКО</span> <span class="amount">- 111 RUB</span></div>
-    <div class="donater"><span class="nickname">ДИОС</span> <span class="amount">- 13999 RUB</span></div>
+    <div class="donater" data-nick="ПЕНЁК" data-amount="1500 RUB"><span class="nickname">ПЕНЁК</span> <span class="amount">- 1500 RUB</span></div>
+    <div class="donater" data-nick="ЮРКА" data-amount="1030 RUB"><span class="nickname">ЮРКА</span> <span class="amount">- 1030 RUB</span></div>
+    <div class="donater" data-nick="ТВИЧСЕЙН" data-amount="478 RUB"><span class="nickname">ТВИЧСЕЙН</span> <span class="amount">- 478 RUB</span></div>
+    <div class="donater" data-nick="АНОНИМ" data-amount="215.55 RUB"><span class="nickname">АНОНИМ</span> <span class="amount">- 215.55 RUB</span></div>
+    <div class="donater" data-nick="ПАКО" data-amount="111 RUB"><span class="nickname">ПАКО</span> <span class="amount">- 111 RUB</span></div>
     <!-- Modals -->
     <div id="about" class="modal">
         <div class="modal-content">
@@ -440,33 +415,95 @@
         // Опционально: менять фразу каждые 30 секунд
         setInterval(setRandomMotivation, 30000);
 
-        // Flying Donaters Interaction
+        // Flying Donaters Chaotic Animation
         const donaters = document.querySelectorAll('.donater');
-        let mouseX = 0, mouseY = 0;
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+        let mouseX = screenWidth / 2;
+        let mouseY = screenHeight / 2;
+        let animationId;
 
+        // Initialize donaters with random positions and velocities
+        donaters.forEach((donater, index) => {
+            // Random initial position
+            donater.style.left = Math.random() * screenWidth + 'px';
+            donater.style.top = Math.random() * screenHeight + 'px';
+
+            // Store velocity data
+            donater.vx = (Math.random() - 0.5) * 4; // Random velocity x: -2 to 2 px/frame
+            donater.vy = (Math.random() - 0.5) * 4; // Random velocity y
+            donater.rotation = 0;
+            donater.rotationSpeed = (Math.random() - 0.5) * 2; // Random rotation speed
+
+            // Initial opacity fade in
+            donater.style.opacity = 0;
+            setTimeout(() => {
+                donater.style.transition = 'opacity 1s ease';
+                donater.style.opacity = 0.9;
+            }, index * 500); // Staggered spawn
+        });
+
+        function animateDonaters() {
+            donaters.forEach(donater => {
+                let x = parseFloat(donater.style.left) || 0;
+                let y = parseFloat(donater.style.top) || 0;
+
+                // Update position
+                x += donater.vx;
+                y += donater.vy;
+
+                // Chaotic drift: slight random perturbation
+                donater.vx += (Math.random() - 0.5) * 0.2;
+                donater.vy += (Math.random() - 0.5) * 0.2;
+
+                // Bound velocities
+                donater.vx = Math.max(-3, Math.min(3, donater.vx));
+                donater.vy = Math.max(-3, Math.min(3, donater.vy));
+
+                // Rotation
+                donater.rotation += donater.rotationSpeed;
+                donater.style.transform = `rotate(${donater.rotation}deg)`;
+
+                // Repulsion from mouse
+                const dx = x - mouseX;
+                const dy = y - mouseY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 100) {
+                    const repelForce = (100 - distance) / 20;
+                    const angle = Math.atan2(dy, dx);
+                    donater.vx += Math.cos(angle) * repelForce;
+                    donater.vy += Math.sin(angle) * repelForce;
+                    donater.classList.add('repel');
+                    setTimeout(() => donater.classList.remove('repel'), 300);
+                }
+
+                // Wrap around screen edges
+                if (x < -donater.offsetWidth) x = screenWidth;
+                if (x > screenWidth) x = -donater.offsetWidth;
+                if (y < -donater.offsetHeight) y = screenHeight;
+                if (y > screenHeight) y = -donater.offsetHeight;
+
+                // Update position
+                donater.style.left = x + 'px';
+                donater.style.top = y + 'px';
+            });
+
+            animationId = requestAnimationFrame(animateDonaters);
+        }
+
+        // Start animation
+        animateDonaters();
+
+        // Mouse move listener
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
+        });
 
-            donaters.forEach(donater => {
-                const rect = donater.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                const dx = centerX - mouseX;
-                const dy = centerY - mouseY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < 80) { // Reduced repel distance to 80px for better feel
-                    const angle = Math.atan2(dy, dx);
-                    const force = (80 - distance) / 8; // Adjusted force for smoother push
-                    donater.style.setProperty('--repel-x', `${force * Math.cos(angle)}px`);
-                    donater.style.setProperty('--repel-y', `${force * Math.sin(angle)}px`);
-                    donater.classList.add('repel');
-                    setTimeout(() => {
-                        donater.classList.remove('repel');
-                    }, 300);
-                }
-            });
+        // Handle resize
+        window.addEventListener('resize', () => {
+            screenWidth = window.innerWidth;
+            screenHeight = window.innerHeight;
         });
 
         function showModal(id) {
@@ -492,4 +529,3 @@
     </script>
 </body>
 </html>
-
