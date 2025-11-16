@@ -42,10 +42,25 @@
             z-index: 1;
         }
 
+        /* Анимированные частицы */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+
         .main-content {
             width: 100%;
             display: flex;
-            flex-direction: class;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -511,6 +526,18 @@
             screenWidth = window.innerWidth;
             screenHeight = window.innerHeight;
         });
+
+        // Анимированные частицы
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            particle.style.opacity = Math.random() * 0.5 + 0.3; // Прозрачность от 0.3 до 0.8
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 5000); // Удаление через 5 сек
+        }
+        setInterval(createParticle, 300); // Новая частица каждые 300 мс
 
         // Модалки
         function showModal(id) {
