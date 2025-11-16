@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">https://github.com/dioscaridos37/kudryaviy23-landing/blob/main/index.html
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kudryavy23 - Stream Soon</title>
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
     <style>
@@ -11,7 +11,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Audiowide', cursive;
             background: linear-gradient(135deg, #1a0d2e 0%, #16213e 50%, #0f0c29 100%);
@@ -21,7 +20,6 @@
             overflow-x: hidden;
             position: relative;
         }
-
         body::before {
             content: '';
             position: absolute;
@@ -32,7 +30,6 @@
             background: radial-gradient(circle at 50% 50%, rgba(145, 70, 255, 0.1) 0%, transparent 70%);
             z-index: 1;
         }
-
         /* Main Content */
         .main-content {
             width: 100%;
@@ -46,18 +43,15 @@
             z-index: 2;
             position: relative;
         }
-
         .container {
             text-align: center;
             width: 100%;
             max-width: 800px;
             padding: 20px;
         }
-
         .header {
             margin-bottom: 40px;
         }
-
         .title {
             font-size: 5rem;
             font-weight: normal;
@@ -69,14 +63,12 @@
             letter-spacing: 3px;
             margin-bottom: 10px;
         }
-
         .subtitle {
             font-size: 1.5rem;
             color: #9146FF;
             opacity: 0.8;
             font-family: 'Audiowide', cursive;
         }
-
         .center-text {
             font-size: 4rem;
             text-transform: uppercase;
@@ -87,7 +79,6 @@
             font-family: 'Audiowide', cursive;
             transition: all 0.5s ease;
         }
-
         .button {
             display: inline-block;
             padding: 15px 40px;
@@ -104,19 +95,16 @@
             animation: pulse 2s infinite;
             font-family: 'Audiowide', cursive;
         }
-
         .button:hover {
             transform: scale(1.05);
             box-shadow: 0 15px 40px rgba(145, 70, 255, 0.5);
             animation: none;
         }
-
         @keyframes pulse {
             0% { box-shadow: 0 10px 30px rgba(145, 70, 255, 0.3); }
             50% { box-shadow: 0 10px 30px rgba(145, 70, 255, 0.6); }
             100% { box-shadow: 0 10px 30px rgba(145, 70, 255, 0.3); }
         }
-
         .footer {
             margin-top: 60px;
             font-size: 1rem;
@@ -127,13 +115,11 @@
             gap: 10px;
             font-family: 'Audiowide', cursive;
         }
-
         .twitch-icon {
             width: 24px;
             height: 24px;
             fill: #9146FF;
         }
-
         /* Player Section */
         .player-section {
             position: fixed;
@@ -150,7 +136,6 @@
             padding: 20px;
             box-sizing: border-box;
         }
-
         .watch-link {
             margin-bottom: 10px;
             font-size: 1.2rem;
@@ -161,13 +146,11 @@
             font-family: 'Audiowide', cursive;
             transition: all 0.3s ease;
         }
-
         .watch-link:hover {
             color: #FF00FF;
             text-shadow: 0 0 10px #FF00FF;
             transform: scale(1.05);
         }
-
         .twitch-player {
             width: 90%;
             max-width: 600px;
@@ -178,7 +161,6 @@
             border: none;
             margin-bottom: 10px;
         }
-
         /* Navigation Buttons under Player */
         .nav-buttons {
             display: flex;
@@ -188,7 +170,6 @@
             gap: 10px;
             flex-wrap: wrap;
         }
-
         .nav-button {
             flex: 1;
             min-width: 120px;
@@ -209,7 +190,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .nav-button::before {
             content: '';
             position: absolute;
@@ -220,18 +200,15 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s;
         }
-
         .nav-button:hover::before {
             left: 100%;
         }
-
         .nav-button:hover, .nav-button.active {
             background: linear-gradient(45deg, #9146FF 0%, #FF00FF 100%);
             opacity: 1;
             box-shadow: 0 5px 20px rgba(145, 70, 255, 0.4);
             transform: translateY(-2px) scale(1.02);
         }
-
         /* Glowing center image */
         .glowing-icon {
             width: 150px;
@@ -245,18 +222,16 @@
             filter: drop-shadow(0 0 20px #9146FF);
             animation: glow 2s ease-in-out infinite alternate;
         }
-
         @keyframes glow {
-            from { 
-                filter: drop-shadow(0 0 20px #9146FF); 
+            from {
+                filter: drop-shadow(0 0 20px #9146FF);
                 transform: scale(1);
             }
-            to { 
-                filter: drop-shadow(0 0 50px #FF00FF); 
+            to {
+                filter: drop-shadow(0 0 50px #FF00FF);
                 transform: scale(1.05);
             }
         }
-
         /* Modal Overlay */
         .modal {
             display: none;
@@ -269,7 +244,6 @@
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(5px);
         }
-
         .modal-content {
             position: absolute;
             top: 50%;
@@ -285,7 +259,6 @@
             box-shadow: 0 20px 40px rgba(145, 70, 255, 0.3);
             border: 1px solid rgba(145, 70, 255, 0.2);
         }
-
         .modal h2 {
             color: #9146FF;
             margin-bottom: 20px;
@@ -293,14 +266,12 @@
             font-size: 1.8rem;
             letter-spacing: 2px;
         }
-
         .modal p, .modal li {
             margin-bottom: 10px;
             line-height: 1.5;
             opacity: 0.9;
             font-size: 1rem;
         }
-
         .close {
             position: absolute;
             top: 10px;
@@ -311,74 +282,59 @@
             cursor: pointer;
             transition: color 0.3s ease;
         }
-
         .close:hover {
             color: #FF00FF;
         }
-
         /* Responsive */
         @media (max-width: 768px) {
             .main-content {
                 padding-bottom: 280px;
             }
-
             .title {
                 font-size: 3rem;
             }
-
             .subtitle {
                 font-size: 1.2rem;
             }
-
             .center-text {
                 font-size: 2.5rem;
                 letter-spacing: 3px;
             }
-
             .button {
                 padding: 12px 30px;
                 font-size: 1rem;
             }
-
             .player-section {
                 height: 280px;
                 padding: 15px;
             }
-
             .twitch-player {
                 height: 140px;
                 width: 95%;
             }
-
             .nav-buttons {
                 flex-direction: column;
                 gap: 8px;
             }
-
             .nav-button {
                 min-width: auto;
                 width: 100%;
             }
-
             .glowing-icon {
                 width: 100px;
                 height: 100px;
             }
         }
-
         @media (max-width: 480px) {
             .title {
                 font-size: 2.5rem;
             }
-
             .center-text {
                 font-size: 2rem;
             }
-
             .watch-link {
                 font-size: 1rem;
             }
-
             .nav-button {
                 font-size: 0.8rem;
                 padding: 10px;
@@ -393,13 +349,9 @@
                 <h1 class="title">Kudryavy23</h1>
                 <p class="subtitle">Легенда Twitch</p>
             </div>
-
             <div class="glowing-icon"></div>
-
             <h2 class="center-text" id="motivation-text">Залетай, будет жарко!</h2>
-
             <a href="https://www.twitch.tv/kudryaviy23" target="_blank" class="button">Watch on Twitch</a>
-
             <div class="footer">
                 <svg class="twitch-icon" viewBox="0 0 24 24">
                     <path fill="#9146FF" d="M21.6 0H2.4C1.07 0 0 1.07 0 2.4v19.2C0 22.93 1.07 24 2.4 24h19.2c1.33 0 2.4-1.07 2.4-2.4V2.4C24 1.07 22.93 0 21.6 0zM12 22c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm-1-11H9v2h2v4h2v-4h2v-2h-2V9h-2v2z"/>
@@ -408,22 +360,19 @@
             </div>
         </div>
     </div>
-
     <div class="player-section">
         <a href="https://www.twitch.tv/kudryaviy23" target="_blank" class="watch-link">СМОТРЕТЬ ТУТ</a>
-        <iframe 
-            src="https://player.twitch.tv/?channel=kudryaviy23&parent=dioscaridos37.github.io&muted=true" 
-            class="twitch-player" 
+        <iframe
+            src="https://player.twitch.tv/?channel=kudryaviy23&parent=dioscaridos37.github.io&muted=true"
+            class="twitch-player"
             allowfullscreen>
         </iframe>
-
         <div class="nav-buttons">
             <button class="nav-button" onclick="showModal('about')">ОБО МНЕ</button>
             <button class="nav-button" onclick="showModal('pc')">МОЙ ПК</button>
             <button class="nav-button" onclick="showModal('donaters')">МОИ ДОНАТЕРЫ</button>
         </div>
     </div>
-
     <!-- Modals -->
     <div id="about" class="modal">
         <div class="modal-content">
@@ -437,7 +386,6 @@
             <p>Где родился . там никому не нужен - привет получается</p>
         </div>
     </div>
-
     <div id="pc" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('pc')">&times;</span>
@@ -455,7 +403,6 @@
             <p>УШИ - КАПЕЛЬКИ С ВБ ЗА 156р</p>
         </div>
     </div>
-
     <div id="donaters" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('donaters')">&times;</span>
@@ -467,7 +414,6 @@
             <p>ПАКО - 111 RUB</p>
         </div>
     </div>
-
     <script>
         // Массив мотивационных фраз
         const motivationPhrases = [
@@ -479,31 +425,25 @@
             "Да я щас офну нахуй эту игру!",
             "Я гошу до того момента,пока он не поверит,что он - не прав!"
         ];
-
         // Функция для установки случайной фразы
         function setRandomMotivation() {
             const randomIndex = Math.floor(Math.random() * motivationPhrases.length);
             document.getElementById('motivation-text').textContent = motivationPhrases[randomIndex];
         }
-
         // Установка при загрузке страницы
         window.addEventListener('load', setRandomMotivation);
-
         // Опционально: менять фразу каждые 30 секунд
         setInterval(setRandomMotivation, 30000);
-
         function showModal(id) {
             document.getElementById(id).style.display = 'block';
             const buttons = document.querySelectorAll('.nav-button');
             buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
         }
-
         function closeModal(id) {
             document.getElementById(id).style.display = 'none';
             document.querySelector('.nav-button.active').classList.remove('active');
         }
-
         // Close modal on outside click
         window.onclick = function(event) {
             const modals = document.querySelectorAll('.modal');
@@ -517,4 +457,3 @@
     </script>
 </body>
 </html>
-
