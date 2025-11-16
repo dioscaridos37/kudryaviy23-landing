@@ -71,6 +71,45 @@
             background: radial-gradient(circle at 50% 50%, rgba(145, 70, 255, 0.1) 0%, transparent 70%);
             z-index: 1; 
         }
+/* Стили для кнопки Dioscaridos */
+.dios-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--color-purple);
+    border-radius: 12px;
+    padding: 8px 15px;
+    text-decoration: none;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: var(--transition);
+    z-index: 100;
+    animation: pulse 2s infinite;
+    box-shadow: 0 0 15px rgba(145, 70, 255, 0.3);
+}
+
+.dios-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 25px rgba(145, 70, 255, 0.5);
+    animation: none;
+}
+
+.dios-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    margin-right: 8px;
+    background-image: url('https://static-cdn.jtvnw.net/jtv_user_pictures/de727508-d453-4b2b-be02-fd7a8a2399c9-profile_image-70x70.png');
+    background-size: cover;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
         
         .particle {
             position: absolute;
@@ -566,6 +605,12 @@
     </style>
 </head>
 <body>
+
+<!-- Кнопка Dioscaridos -->
+<a href="dios.html" class="dios-button">
+    <div class="dios-icon"></div>
+    <span>Dioscaridos</span>
+</a>
 
     <main class="main-content">
         <section class="container">
