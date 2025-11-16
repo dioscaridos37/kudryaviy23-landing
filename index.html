@@ -1,25 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kudryavy23 - Stream Soon</title>
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #1a0d2e 0%, #16213e 50%, #0f0c29 100%);
+            --accent-gradient: linear-gradient(45deg, #9146FF 0%, #FF00FF 100%);
+            --accent-glow: rgba(145, 70, 255, 0.5);
+            --text-glow: rgba(255, 255, 255, 0.3);
+            --purple: #9146FF;
+            --magenta: #FF00FF;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Audiowide', cursive;
-            background: linear-gradient(135deg, #1a0d2e 0%, #16213e 50%, #0f0c29 100%);
+            background: var(--primary-gradient);
             color: white;
             display: flex;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
         }
+
         body::before {
             content: '';
             position: absolute;
@@ -30,11 +41,11 @@
             background: radial-gradient(circle at 50% 50%, rgba(145, 70, 255, 0.1) 0%, transparent 70%);
             z-index: 1;
         }
-        /* Main Content */
+
         .main-content {
             width: 100%;
             display: flex;
-            flex-direction: column;
+            flex-direction: class;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -42,46 +53,50 @@
             z-index: 2;
             position: relative;
         }
+
         .container {
             text-align: center;
             width: 100%;
             max-width: 800px;
             padding: 20px;
         }
+
         .header {
             margin-bottom: 40px;
         }
+
         .title {
             font-size: 5rem;
             font-weight: normal;
-            background: linear-gradient(45deg, white 0%, #9146FF 100%);
+            background: linear-gradient(45deg, white 0%, var(--purple) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 20px rgba(145, 70, 255, 0.5);
+            text-shadow: 0 0 20px var(--accent-glow);
             letter-spacing: 3px;
             margin-bottom: 10px;
         }
+
         .subtitle {
             font-size: 1.5rem;
-            color: #9146FF;
+            color: var(--purple);
             opacity: 0.8;
-            font-family: 'Audiowide', cursive;
         }
+
         .center-text {
             font-size: 4rem;
             text-transform: uppercase;
             color: white;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            text-shadow: 0 0 30px var(--text-glow);
             margin: 60px 0;
             letter-spacing: 5px;
-            font-family: 'Audiowide', cursive;
             transition: all 0.5s ease;
         }
+
         .button {
             display: inline-block;
             padding: 15px 40px;
-            background: linear-gradient(45deg, #9146FF 0%, #FF00FF 100%);
+            background: var(--accent-gradient);
             color: white;
             text-decoration: none;
             border-radius: 50px;
@@ -92,18 +107,19 @@
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(145, 70, 255, 0.3);
             animation: pulse 2s infinite;
-            font-family: 'Audiowide', cursive;
         }
+
         .button:hover {
             transform: scale(1.05);
             box-shadow: 0 15px 40px rgba(145, 70, 255, 0.5);
             animation: none;
         }
+
         @keyframes pulse {
-            0% { box-shadow: 0 10px 30px rgba(145, 70, 255, 0.3); }
+            0%, 100% { box-shadow: 0 10px 30px rgba(145, 70, 255, 0.3); }
             50% { box-shadow: 0 10px 30px rgba(145, 70, 255, 0.6); }
-            100% { box-shadow: 0 10px 30px rgba(145, 70, 255, 0.3); }
         }
+
         .footer {
             margin-top: 60px;
             font-size: 1rem;
@@ -112,14 +128,14 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            font-family: 'Audiowide', cursive;
         }
+
         .twitch-icon {
             width: 24px;
             height: 24px;
-            fill: #9146FF;
+            fill: var(--purple);
         }
-        /* Navigation Buttons */
+
         .nav-buttons {
             display: flex;
             justify-content: space-around;
@@ -129,6 +145,7 @@
             flex-wrap: wrap;
             margin-top: 40px;
         }
+
         .nav-button {
             flex: 1;
             min-width: 120px;
@@ -139,7 +156,6 @@
             text-decoration: none;
             border-radius: 20px;
             text-align: center;
-            font-family: 'Audiowide', cursive;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.9rem;
@@ -149,6 +165,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .nav-button::before {
             content: '';
             position: absolute;
@@ -159,16 +176,19 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s;
         }
+
         .nav-button:hover::before {
             left: 100%;
         }
-        .nav-button:hover, .nav-button.active {
-            background: linear-gradient(45deg, #9146FF 0%, #FF00FF 100%);
+
+        .nav-button:hover,
+        .nav-button.active {
+            background: var(--accent-gradient);
             opacity: 1;
             box-shadow: 0 5px 20px rgba(145, 70, 255, 0.4);
             transform: translateY(-2px) scale(1.02);
         }
-        /* Glowing center image */
+
         .glowing-icon {
             width: 150px;
             height: 150px;
@@ -178,20 +198,21 @@
             background-repeat: no-repeat;
             background-position: center;
             border-radius: 50%;
-            filter: drop-shadow(0 0 20px #9146FF);
+            filter: drop-shadow(0 0 20px var(--purple));
             animation: glow 2s ease-in-out infinite alternate;
         }
+
         @keyframes glow {
             from {
-                filter: drop-shadow(0 0 20px #9146FF);
+                filter: drop-shadow(0 0 20px var(--purple));
                 transform: scale(1);
             }
             to {
-                filter: drop-shadow(0 0 50px #FF00FF);
+                filter: drop-shadow(0 0 50px var(--magenta));
                 transform: scale(1.05);
             }
         }
-        /* Modal Overlay */
+
         .modal {
             display: none;
             position: fixed;
@@ -203,12 +224,13 @@
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(5px);
         }
+
         .modal-content {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, #1a0d2e 0%, #16213e 100%);
+            background: var(--primary-gradient);
             padding: 30px;
             border-radius: 15px;
             max-width: 500px;
@@ -218,33 +240,38 @@
             box-shadow: 0 20px 40px rgba(145, 70, 255, 0.3);
             border: 1px solid rgba(145, 70, 255, 0.2);
         }
+
         .modal h2 {
-            color: #9146FF;
+            color: var(--purple);
             margin-bottom: 20px;
             text-align: center;
             font-size: 1.8rem;
             letter-spacing: 2px;
         }
-        .modal p, .modal li {
+
+        .modal p,
+        .modal li {
             margin-bottom: 10px;
             line-height: 1.5;
             opacity: 0.9;
             font-size: 1rem;
         }
+
         .close {
             position: absolute;
             top: 10px;
             right: 15px;
-            color: #9146FF;
+            color: var(--purple);
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
             transition: color 0.3s ease;
         }
+
         .close:hover {
-            color: #FF00FF;
+            color: var(--magenta);
         }
-        /* Flying Donaters */
+
         .donater {
             position: absolute;
             background: linear-gradient(45deg, rgba(145, 70, 255, 0.1), rgba(255, 0, 255, 0.1));
@@ -252,7 +279,7 @@
             border-radius: 15px;
             padding: 8px 12px;
             font-size: 0.8rem;
-            color: #FF00FF;
+            color: var(--magenta);
             text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
             z-index: 0;
             pointer-events: auto;
@@ -261,66 +288,39 @@
             white-space: nowrap;
             opacity: 0.9;
         }
+
         .donater .nickname {
             font-weight: bold;
-            color: #9146FF;
+            color: var(--purple);
         }
+
         .donater .amount {
             margin-left: 5px;
             opacity: 0.8;
         }
+
         .donater.repel {
             transform: scale(1.1) !important;
             z-index: 5;
         }
-        /* Responsive */
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .title {
-                font-size: 3rem;
-            }
-            .subtitle {
-                font-size: 1.2rem;
-            }
-            .center-text {
-                font-size: 2.5rem;
-                letter-spacing: 3px;
-            }
-            .button {
-                padding: 12px 30px;
-                font-size: 1rem;
-            }
-            .nav-buttons {
-                flex-direction: column;
-                gap: 8px;
-            }
-            .nav-button {
-                min-width: auto;
-                width: 100%;
-            }
-            .glowing-icon {
-                width: 100px;
-                height: 100px;
-            }
-            .donater {
-                font-size: 0.7rem;
-                padding: 6px 10px;
-            }
+            .title { font-size: 3rem; }
+            .subtitle { font-size: 1.2rem; }
+            .center-text { font-size: 2.5rem; letter-spacing: 3px; }
+            .button { padding: 12px 30px; font-size: 1rem; }
+            .nav-buttons { flex-direction: column; gap: 8px; }
+            .nav-button { min-width: auto; width: 100%; }
+            .glowing-icon { width: 100px; height: 100px; }
+            .donater { font-size: 0.7rem; padding: 6px 10px; }
         }
+
         @media (max-width: 480px) {
-            .title {
-                font-size: 2.5rem;
-            }
-            .center-text {
-                font-size: 2rem;
-            }
-            .nav-button {
-                font-size: 0.8rem;
-                padding: 10px;
-            }
-            .donater {
-                font-size: 0.6rem;
-                padding: 5px 8px;
-            }
+            .title { font-size: 2.5rem; }
+            .center-text { font-size: 2rem; }
+            .nav-button { font-size: 0.8rem; padding: 10px; }
+            .donater { font-size: 0.6rem; padding: 5px 8px; }
         }
     </style>
 </head>
@@ -333,7 +333,7 @@
             </div>
             <div class="glowing-icon"></div>
             <h2 class="center-text" id="motivation-text">Залетай, будет жарко!</h2>
-            <a href="https://www.twitch.tv/kudryaviy23" target="_blank" class="button">Watch on Twitch</a>
+            <a href="https://www.twitch.tv/kudryavy23" target="_blank" class="button">Watch on Twitch</a>
             <div class="nav-buttons">
                 <button class="nav-button" onclick="showModal('about')">ОБО МНЕ</button>
                 <button class="nav-button" onclick="showModal('pc')">МОЙ ПК</button>
@@ -341,31 +341,44 @@
             </div>
             <div class="footer">
                 <svg class="twitch-icon" viewBox="0 0 24 24">
-                    <path fill="#9146FF" d="M21.6 0H2.4C1.07 0 0 1.07 0 2.4v19.2C0 22.93 1.07 24 2.4 24h19.2c1.33 0 2.4-1.07 2.4-2.4V2.4C24 1.07 22.93 0 21.6 0zM12 22c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm-1-11H9v2h2v4h2v-4h2v-2h-2V9h-2v2z"/>
+                    <path fill="var(--purple)" d="M21.6 0H2.4C1.07 0 0 1.07 0 2.4v19.2C0 22.93 1.07 24 2.4 24h19.2c1.33 0 2.4-1.07 2.4-2.4V2.4C24 1.07 22.93 0 21.6 0zM12 22c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm-1-11H9v2h2v4h2v-4h2v-2h-2V9h-2v2z"/>
                 </svg>
                 Подпишись и не пропусти
             </div>
         </div>
     </div>
+
     <!-- Flying Donaters -->
-    <div class="donater" data-nick="ПЕНЁК" data-amount="1500 RUB"><span class="nickname">ПЕНЁК</span> <span class="amount">- 1500 RUB</span></div>
-    <div class="donater" data-nick="ЮРКА" data-amount="1030 RUB"><span class="nickname">ЮРКА</span> <span class="amount">- 1030 RUB</span></div>
-    <div class="donater" data-nick="ТВИЧСЕЙН" data-amount="478 RUB"><span class="nickname">ТВИЧСЕЙН</span> <span class="amount">- 478 RUB</span></div>
-    <div class="donater" data-nick="АНОНИМ" data-amount="215.55 RUB"><span class="nickname">АНОНИМ</span> <span class="amount">- 215.55 RUB</span></div>
-    <div class="donater" data-nick="ПАКО" data-amount="111 RUB"><span class="nickname">ПАКО</span> <span class="amount">- 111 RUB</span></div>
+    <div class="donater" data-nick="ПЕНЁК" data-amount="1500 RUB">
+        <span class="nickname">ПЕНЁК</span> <span class="amount">- 1500 RUB</span>
+    </div>
+    <div class="donater" data-nick="ЮРКА" data-amount="1030 RUB">
+        <span class="nickname">ЮРКА</span> <span class="amount">- 1030 RUB</span>
+    </div>
+    <div class="donater" data-nick="ТВИЧСЕЙН" data-amount="478 RUB">
+        <span class="nickname">ТВИЧСЕЙН</span> <span class="amount">- 478 RUB</span>
+    </div>
+    <div class="donater" data-nick="АНОНИМ" data-amount="215.55 RUB">
+        <span class="nickname">АНОНИМ</span> <span class="amount">- 215.55 RUB</span>
+    </div>
+    <div class="donater" data-nick="ПАКО" data-amount="111 RUB">
+        <span class="nickname">ПАКО</span> <span class="amount">- 111 RUB</span>
+    </div>
+
     <!-- Modals -->
     <div id="about" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('about')">&times;</span>
             <h2>ОБО МНЕ 👁️-👁️</h2>
-            <p>Живу в частном доме , топлю печку зимой .</p>
+            <p>Живу в частном доме, топлю печку зимой.</p>
             <p>Рост - шкаф</p>
             <p>Вес - тумбочка</p>
             <p>Харизма - зеркало</p>
-            <p>Зачем я пришёл в стримеры ? А зачем ты смотришь тогда меня ?</p>
-            <p>Где родился . там никому не нужен - привет получается</p>
+            <p>Зачем я пришёл в стримеры? А зачем ты смотришь тогда меня?</p>
+            <p>Где родился. там никому не нужен - привет получается</p>
         </div>
     </div>
+
     <div id="pc" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('pc')">&times;</span>
@@ -377,12 +390,13 @@
             <p>ЖД - 2тэбэ</p>
             <p>Периферия дешман</p>
             <p>МЫШЬ - НА КУХНЕ ПОЙМАЛ</p>
-            <p>КЛАВА - подарили рейзер ( светится круто )</p>
+            <p>КЛАВА - подарили рейзер (светится круто)</p>
             <p>МИКРО - ЗЕТ КОРЭДЖ С ДНС</p>
             <p>КАМ - ОРАКЛ</p>
             <p>УШИ - КАПЕЛЬКИ С ВБ ЗА 156р</p>
         </div>
     </div>
+
     <div id="donaters" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('donaters')">&times;</span>
@@ -394,8 +408,9 @@
             <p>ПАКО - 111 RUB</p>
         </div>
     </div>
+
     <script>
-        // Массив мотивационных фраз
+        // Мотивационные фразы
         const motivationPhrases = [
             "Вроде мало еды,а вроде поели немного и все!",
             "Щяс умру нахуй,так сметаны и не поев!",
@@ -405,42 +420,36 @@
             "Да я щас офну нахуй эту игру!",
             "Я гошу до того момента,пока он не поверит,что он - не прав!"
         ];
-        // Функция для установки случайной фразы
+
         function setRandomMotivation() {
             const randomIndex = Math.floor(Math.random() * motivationPhrases.length);
             document.getElementById('motivation-text').textContent = motivationPhrases[randomIndex];
         }
-        // Установка при загрузке страницы
+
+        // Инициализация и интервал
         window.addEventListener('load', setRandomMotivation);
-        // Опционально: менять фразу каждые 30 секунд
         setInterval(setRandomMotivation, 30000);
 
-        // Flying Donaters Chaotic Animation
+        // Анимация донатеров
         const donaters = document.querySelectorAll('.donater');
-        const screenWidth = window.innerWidth;
-        const screenHeight = window.innerHeight;
+        let screenWidth = window.innerWidth;
+        let screenHeight = window.innerHeight;
         let mouseX = screenWidth / 2;
         let mouseY = screenHeight / 2;
         let animationId;
 
-        // Initialize donaters with random positions and velocities
         donaters.forEach((donater, index) => {
-            // Random initial position
             donater.style.left = Math.random() * screenWidth + 'px';
             donater.style.top = Math.random() * screenHeight + 'px';
-
-            // Store velocity data
-            donater.vx = (Math.random() - 0.5) * 4; // Random velocity x: -2 to 2 px/frame
-            donater.vy = (Math.random() - 0.5) * 4; // Random velocity y
+            donater.vx = (Math.random() - 0.5) * 4;
+            donater.vy = (Math.random() - 0.5) * 4;
             donater.rotation = 0;
-            donater.rotationSpeed = (Math.random() - 0.5) * 2; // Random rotation speed
-
-            // Initial opacity fade in
+            donater.rotationSpeed = (Math.random() - 0.5) * 2;
             donater.style.opacity = 0;
             setTimeout(() => {
                 donater.style.transition = 'opacity 1s ease';
                 donater.style.opacity = 0.9;
-            }, index * 500); // Staggered spawn
+            }, index * 500);
         });
 
         function animateDonaters() {
@@ -448,23 +457,22 @@
                 let x = parseFloat(donater.style.left) || 0;
                 let y = parseFloat(donater.style.top) || 0;
 
-                // Update position
                 x += donater.vx;
                 y += donater.vy;
 
-                // Chaotic drift: slight random perturbation
+                // Хаотичный дрейф
                 donater.vx += (Math.random() - 0.5) * 0.2;
                 donater.vy += (Math.random() - 0.5) * 0.2;
 
-                // Bound velocities
+                // Ограничение скоростей
                 donater.vx = Math.max(-3, Math.min(3, donater.vx));
                 donater.vy = Math.max(-3, Math.min(3, donater.vy));
 
-                // Rotation
+                // Ротация
                 donater.rotation += donater.rotationSpeed;
                 donater.style.transform = `rotate(${donater.rotation}deg)`;
 
-                // Repulsion from mouse
+                // Отталкивание от мыши
                 const dx = x - mouseX;
                 const dy = y - mouseY;
                 const distance = Math.sqrt(dx * dx + dy * dy);
@@ -477,13 +485,14 @@
                     setTimeout(() => donater.classList.remove('repel'), 300);
                 }
 
-                // Wrap around screen edges
-                if (x < -donater.offsetWidth) x = screenWidth;
-                if (x > screenWidth) x = -donater.offsetWidth;
-                if (y < -donater.offsetHeight) y = screenHeight;
-                if (y > screenHeight) y = -donater.offsetHeight;
+                // Обертывание по краям экрана
+                const width = donater.offsetWidth;
+                const height = donater.offsetHeight;
+                if (x < -width) x = screenWidth;
+                if (x > screenWidth) x = -width;
+                if (y < -height) y = screenHeight;
+                if (y > screenHeight) y = -height;
 
-                // Update position
                 donater.style.left = x + 'px';
                 donater.style.top = y + 'px';
             });
@@ -491,41 +500,38 @@
             animationId = requestAnimationFrame(animateDonaters);
         }
 
-        // Start animation
         animateDonaters();
 
-        // Mouse move listener
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
         });
 
-        // Handle resize
         window.addEventListener('resize', () => {
             screenWidth = window.innerWidth;
             screenHeight = window.innerHeight;
         });
 
+        // Модалки
         function showModal(id) {
             document.getElementById(id).style.display = 'block';
-            const buttons = document.querySelectorAll('.nav-button');
-            buttons.forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.nav-button').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
         }
+
         function closeModal(id) {
             document.getElementById(id).style.display = 'none';
-            document.querySelector('.nav-button.active').classList.remove('active');
+            document.querySelector('.nav-button.active')?.classList.remove('active');
         }
-        // Close modal on outside click
+
         window.onclick = function(event) {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
+            document.querySelectorAll('.modal').forEach(modal => {
                 if (event.target === modal) {
                     modal.style.display = 'none';
                     document.querySelector('.nav-button.active')?.classList.remove('active');
                 }
             });
-        }
+        };
     </script>
 </body>
 </html>
